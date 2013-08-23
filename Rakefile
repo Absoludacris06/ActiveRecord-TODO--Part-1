@@ -1,6 +1,7 @@
 require 'rake'
 require 'rspec/core/rake_task'
 
+require_relative 'lib/to_do_importer'
 require_relative 'config/application'
 
 desc "create the database"
@@ -28,7 +29,9 @@ desc "populate the test database with sample data"
 task "db:seed" do
   require APP_ROOT.join('db', 'seeds.rb')
   data_file_path = TaskGenerator.create_fake_task_data
-  # insert call to db_importer(data_file_path)
+  # require APP_ROOT.join('lib', 'to_do_importer.rb')
+  TodoImporter.import(data_file_path)
+  p "DB populated with fake data."
 end
 
 desc 'Retrieves the current schema version number'
