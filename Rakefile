@@ -27,6 +27,8 @@ end
 desc "populate the test database with sample data"
 task "db:seed" do
   require APP_ROOT.join('db', 'seeds.rb')
+  data_file_path = TaskGenerator.create_fake_task_data
+  # insert call to db_importer(data_file_path)
 end
 
 desc 'Retrieves the current schema version number'
