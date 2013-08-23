@@ -13,7 +13,14 @@ class Controller
       puts "Deleted: #{specific_task[:description]}"
       Task.delete(specific_task[:id])
     when "add"
-      Task.create(description: @task_item)
+      task = Task.new(description: @task_item)
+      if task.valid?
+        task.save
+        puts "Added: #{specific_task[:description]}"
+      else
+        puts "Something went wrong"
+        puts task.full_messages
+      end
     when "completed"
       puts "Completed: #{specific_task[:description]}"
       Task.update(specific_task[:id], :completed => true)
