@@ -8,7 +8,7 @@ class Controller
   def self.input
     case @command
     when "list"
-      View.format_list(Task.all)
+      View.format_list(Task.all.order("created_at"))
     when "delete"
       puts "Deleted: #{specific_task[:description]}"
       Task.delete(specific_task[:id])
@@ -30,7 +30,7 @@ class Controller
   end
 
   def self.specific_task
-    task_array = Task.all
+    task_array = Task.all.order("created_at")
     task_array[@task_item.to_i - 1]
   end
 end
